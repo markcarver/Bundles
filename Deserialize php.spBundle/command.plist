@@ -14,7 +14,7 @@
   if ($unserialized = unserialize($input)) { 
     $input = $unserialized;
   }
-  @include_once $GLOBALS['SP_BUNDLE_PATH'] . '/krumo/class.krumo.php';
+  include_once $_SERVER['SP_BUNDLE_PATH'] . '/krumo/class.krumo.php';
   if ((is_object($input) || is_array($input)) &amp;&amp; function_exists('krumo')) {
     print krumo($input);
   }
