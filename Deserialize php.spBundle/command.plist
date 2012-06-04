@@ -9,17 +9,27 @@
 	<key>command</key>
 	<string>#!/usr/bin/php
 
-&lt;pre&gt;
 &lt;?php
- print_r( unserialize(fgets(STDIN)));
-?&gt;
-&lt;/pre&gt;</string>
+  @include_once '/server/.conf/php/krumo/class.krumo.php';
+  $input = fgets(STDIN);
+  if ($unserialized = unserialize($input)) { 
+    $input = $unserialized;
+  }
+  if ((is_object($input) || is_array($input)) &amp;&amp; function_exists('krumo')) {
+    print krumo($input);
+  }
+  else {
+    print '&lt;pre&gt;' . print_r($input, TRUE) . '&lt;/pre&gt;';
+  }
+?&gt;</string>
 	<key>contact</key>
 	<string>ns@zbaxvv.pbz</string>
 	<key>description</key>
 	<string>Deserializes those PHP objects that drupal loves so much.</string>
 	<key>input</key>
 	<string>selectedtext</string>
+	<key>input_fallback</key>
+	<string>entirecontent</string>
 	<key>internalKeyEquivalent</key>
 	<dict>
 		<key>characters</key>
